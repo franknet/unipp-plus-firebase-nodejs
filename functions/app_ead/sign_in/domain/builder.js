@@ -1,0 +1,40 @@
+/* eslint-disable require-jsdoc */
+/* eslint-disable max-len */
+
+const _ = require("lodash");
+
+exports.from = (userData, contract, systems) => {
+  const user = userData["content"][0];
+  const isContractSigned = contract["valor"];
+  const userStatus = (isContractSigned ? "SignContract" : user["semestre"]) == null ? "Enroll" : user["situacaoAluno"];
+
+  return {
+    "id": user["id"],
+    "rg": user["matricula"],
+    "name": user["nomeAluno"],
+    "gender": user["sexo"],
+    "photo": user["foto"],
+    "status": userStatus,
+    "isEad": true,
+    "cardId": cardId(systems),
+    "course": course(user),
+  };
+};
+
+function cardId(systems) {
+  return {
+    "type": "pdf",
+    "url": _.get(_.find(systems, {"id": 153}), "url", null),
+  };
+}
+
+function course(user) {
+  return {
+    "id": user["codCurso"],
+    "name": user["nomeCurso"],
+    "class": user["turma"],
+    "grade": user["serie"],
+    "year": user["ano"],
+    "semester": user["semestre"],
+  };
+}
