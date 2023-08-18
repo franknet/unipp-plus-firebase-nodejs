@@ -1,34 +1,32 @@
+/* eslint-disable valid-jsdoc */
 /* eslint-disable max-len */
 
-const api = require("./api");
-const storage = require("firebase-admin").storage().bucket();
+const API = require("./api");
+const Storage = require("firebase-admin").storage().bucket();
 
-exports.fetchExtract = (session) => api.fetchExtract(session);
+exports.fetchExtract = (session) => API.fetchExtract(session);
 
-exports.fetchBills = (session) => api.fetchBills(session);
+exports.fetchBills = (session) => API.fetchBills(session);
 
-exports.fetchBankSlipURL = (session, bankSlipId) => api.fetchBankSlipURL(session, bankSlipId);
+exports.fetchBankSlipURL = (session, bankSlipId) => API.fetchBankSlipURL(session, bankSlipId);
 
-exports.fetchBankSlipPreview = (session, bankSlipURL) => api.fetchBankSlipPreview(session, bankSlipURL);
+exports.fetchBankSlipPreview = (session, bankSlipURL) => API.fetchBankSlipPreview(session, bankSlipURL);
 
-exports.fetchBankSlipPDF = (session, bankSlipURL, body) => api.fetchBankSlipPDF(session, bankSlipURL, body);
+exports.fetchBankSlipPDF = (session, bankSlipURL, body) => API.fetchBankSlipPDF(session, bankSlipURL, body);
 
-exports.fetchBankSlipPDFFile = (name) => storage.file(name);
+exports.fetchBankSlipPDFFile = (name) => Storage.file(name);
 
 /**
  * @param {File} name
  * @param {any} data
  * @returns {Promise<boolean>}
  */
-
-exports.saveBankSlipPDF = (file, data) => {
+exports.saveBankSlipPDF = (file, data) => new Promise((resolve, reject) => {
   const stream = file.createWriteStream({
     contentType: "application/pdf",
   });
-  return new Promise((resolve, reject) => {
-    stream.write(data);
-    stream.end();
-    stream.on("finish", resolve(true));
-    stream.on("error", reject);
-  });
-};
+  stream.write(data);
+  stream.end();
+  stream.on("finish", resolve(true));
+  stream.on("error", reject);
+});

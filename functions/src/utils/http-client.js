@@ -9,7 +9,7 @@ const axios = require("axios").default;
 axios.defaults.headers.common["User-Agent"] = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/109.0";
 axios.defaults.maxRedirects = 0;
 axios.defaults.method = "get";
-axios.interceptors.response.use(responseInterceptor);
+// axios.interceptors.response.use(responseInterceptor);
 
 /**
  * @param {import("axios").AxiosResponse<any, any>} response

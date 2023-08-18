@@ -2,7 +2,7 @@
 /* eslint-disable max-len */
 
 const API = require("./api");
-const FBStorage = require("firebase-admin").storage().bucket();
+const Storage = require("firebase-admin").storage().bucket();
 const {Status} = require("../../../utils/status-code-validations");
 
 /**
@@ -18,9 +18,9 @@ exports.fetchSec = (cookie, secUrl) => API.fetch({
   validateStatus: Status.redirect,
 });
 
-exports.fetchStudentPhoto = async (cookie) => API.fetchStudentPhoto(cookie);
+exports.fetchStudentPhoto = (cookie) => API.fetchStudentPhoto(cookie);
 
-exports.userPhotoFile = (userRg) => FBStorage.file(`photos/${userRg}.png`);
+exports.fetchUserPhotoFile = (userRg) => Storage.file(`photos/${userRg}.png`);
 
 /**
  * @param {File} file

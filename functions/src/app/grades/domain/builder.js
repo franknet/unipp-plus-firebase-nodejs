@@ -9,6 +9,8 @@ const {table} = require("../../../utils/html-parser");
 const nfLabels = ["cod", "discipline", "special", "type", "obs", "np1", "np2", "mf", "obsences"];
 const meLabels = ["cod", "discipline", "special", "type", "obs", "obsences", "ms", "ex", "mf"];
 const tableClass = "table-striped";
+const unreleasedStatus = ["NL", "--"];
+const releasedStatus = ["AP", "NC"];
 
 exports.buildGrades = (nfHtml, meHtml) => {
   const nf = table(nfHtml, tableClass, nfLabels);
@@ -28,38 +30,37 @@ exports.buildGrades = (nfHtml, meHtml) => {
 function filterLastReleased(discipline) {
   const released = {};
   const grades = [];
-  const unreleasedStatus = ["NL", "--"];
   const np1 = discipline["np1"];
   const np2 = discipline["np2"];
   const ms = discipline["ms"];
   const ex = discipline["ex"];
   const mf = discipline["mf"];
 
-  if (!unreleasedStatus.includes(np1)) {
+  if (!unreleasedStatus.includes(np1) || releasedStatus.includes(np1)) {
     grades.push({
       "name": "np1",
       "value": toNumber(np1),
     });
   }
-  if (!unreleasedStatus.includes(np2)) {
+  if (!unreleasedStatus.includes(np2) || releasedStatus.includes(np2)) {
     grades.push({
       "name": "np2",
       "value": toNumber(np2),
     });
   }
-  if (!unreleasedStatus.includes(ms)) {
+  if ((!unreleasedStatus.includes(np1) || !unreleasedStatus.includes(np2)) && !unreleasedStatus.includes(ms) || releasedStatus.includes(ms)) {
     grades.push({
       "name": "ms",
       "value": toNumber(ms),
     });
   }
-  if (!unreleasedStatus.includes(ex)) {
+  if (!unreleasedStatus.includes(ex) || releasedStatus.includes(ex)) {
     grades.push({
       "name": "ex",
       "value": toNumber(ex),
     });
   }
-  if (!unreleasedStatus.includes(mf)) {
+  if ((!unreleasedStatus.includes(np1) || !unreleasedStatus.includes(np2)) && !unreleasedStatus.includes(ms) || releasedStatus.includes(mf)) {
     grades.push({
       "name": "mf",
       "value": toNumber(mf),

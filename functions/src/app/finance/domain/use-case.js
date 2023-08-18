@@ -22,7 +22,8 @@ exports.fetchBills = async function(session) {
     const {data} = await repository.fetchBills(session);
     const result = buildBills(data);
     const bills = result["bills"];
-    const tasks = _.flatMap(bills, (bill) => saveBankSlipPDF(session, bill));
+    const filterBills = _.filter(bills, (bill) => bill["status"]["code"] == 0);
+    const tasks = _.flatMap(filterBills, (bill) => saveBankSlipPDF(session, bill));
     await Promise.all(tasks);
     return result;
   } catch (error) {
@@ -31,30 +32,27 @@ exports.fetchBills = async function(session) {
 };
 
 const saveBankSlipPDF = async function(session, bill) {
-  const bankSlipId = bill["bankSlipId"];
-  const userRg = session["user"]["rg"];
-  const bankSlipPDFFile = repository.fetchBankSlipPDFFile(`bank_slips/${userRg}/${bankSlipId}.pdf`);
-  const isSaved = await bankSlipPDFFile.exists()[0];
-  console.log(`Is file saved: ${isSaved}`);
-
-  if (isSaved) {
-    return false;
-  } else {
-    try {
-      const bankSlipURLResponse = await repository.fetchBankSlipURL(session, bankSlipId);
-      const bankSlipUrl = bankSlipURLResponse.headers["location"];
-      const bankSlipPreviewResponse = await repository.fetchBankSlipPreview(session, bankSlipUrl);
-      const bankSlipParams = buildBankSlipParams(bankSlipPreviewResponse.data);
-      const bankSlipPDFResponse = await repository.fetchBankSlipPDF(session, bankSlipUrl, bankSlipParams);
-      return await repository.saveBankSlipPDF(bankSlipPDFFile, bankSlipPDFResponse.data);
-    } catch (error) {
-      trackError(error);
-      bill["bankSlipId"] = null;
-      bill["status"] = {
-        "code": 0,
-        "message": "Download não disponível",
-      };
+  try {
+    const bankSlipId = bill["bankSlipId"];
+    const userRg = session["user"]["rg"];
+    const file = repository.fetchBankSlipPDFFile(`bank_slips/${userRg}/${bankSlipId}.pdf`);
+    const exists = await file.exists()[0];
+    if (exists) {
       return false;
     }
+    const bankSlipURLResponse = await repository.fetchBankSlipURL(session, bankSlipId);
+    const bankSlipUrl = bankSlipURLResponse.headers["location"];
+    const bankSlipPreviewResponse = await repository.fetchBankSlipPreview(session, bankSlipUrl);
+    const bankSlipParams = buildBankSlipParams(bankSlipPreviewResponse.data);
+    const bankSlipPDFResponse = await repository.fetchBankSlipPDF(session, bankSlipUrl, bankSlipParams);
+    return await repository.saveBankSlipPDF(file, bankSlipPDFResponse.data);
+  } catch (error) {
+    trackError(error);
+    bill["bankSlipId"] = null;
+    bill["status"] = {
+      "code": 0,
+      "message": "Download não disponível",
+    };
+    return false;
   }
 };

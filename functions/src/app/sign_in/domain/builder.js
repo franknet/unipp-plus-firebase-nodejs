@@ -19,7 +19,6 @@ exports.buildUser = function(user, systems) {
     "rg": user["identificacao"],
     "name": user["nomeUsuario"],
     "gender": user["sexo"],
-    "photo": user["foto"],
     "status": validateStatus(user),
     "isEad": false,
     "cardId": cardId(systems),
