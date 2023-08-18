@@ -6,17 +6,17 @@ exports.singIn = (credentials) => request({
   method: "post",
   headers: {"Content-Type": "application/x-www-form-urlencoded"},
   data: credentials,
-  validateStatus: Status.ok,
+  validateStatus: Status.Ok,
 });
 
 exports.fetchContract = (cookie, userCode) => request({
   url: `https://gfa.unip.br/aluno/apix/pessoas/cod_aluno/${userCode}/verifica_exibe_contrato_login`,
   headers: {"Cookie": cookie},
-  validateStatus: Status.ok,
+  validateStatus: Status.Ok,
 });
 
 exports.fetchUser = (cookie, userId) => request({
   url: `https://gfa.unip.br/aluno/apix/api/rest/alunos/user/${userId}`,
   headers: {"Cookie": cookie},
-  validateStatus: Status.ok,
+  validateStatus: Status.Ok,
 });

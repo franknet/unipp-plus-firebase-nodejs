@@ -1,10 +1,21 @@
 /* eslint-disable max-len */
 /* eslint-disable valid-jsdoc */
 const logger = require("firebase-functions/logger");
+const isDebug = process.env["FIREBASE_DEBUG_MODE"] == "true";
 
-exports.logObject = (object) => console.log("LOGGER:\n" + JSON.stringify(object, null, 4));
-exports.log = (any) => console.log("LOGGER:\n" + any);
 /**
  * @param {Error} error
  */
 exports.trackError = (error) => logger.error(error);
+exports.debugLog = (tag, args) => {
+  if (!isDebug) {
+    return;
+  }
+  console.log("unip-plus-2: " + tag);
+  if (args instanceof Object) {
+    console.log(JSON.stringify(args, null, 4));
+  } else {
+    console.log(args);
+  }
+  console.log("\n");
+};
