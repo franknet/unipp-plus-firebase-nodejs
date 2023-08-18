@@ -15,6 +15,11 @@ const PAYMENT_TYPE = {
   CD: "Confissão de dívida",
 };
 
+const ACCEPTED_STATUS = [
+  "OK",
+  "ABONO",
+];
+
 const TABLE_COLUMNS = [
   "seq",
   "install",
@@ -51,8 +56,8 @@ function refactorPayments(payments) {
 
 function paymentStatus(payment) {
   return {
-    "code": payment["status"] === "OK" ? 1 : 0,
-    "message": payment["status"] === "OK" ? `Pago no dia ${payment["paymentDate"]}` : `Vence no dia ${payment["dueDate"]}`,
+    "code": ACCEPTED_STATUS.includes(payment["status"]) ? 1 : 0,
+    "message": payment["status"] === "OK" ? `Pago no dia ${payment["paymentDate"]}` : payment["status"] === "ABONO" ? "Pagamento abonado" : `Vence no dia ${payment["dueDate"]}`,
   };
 }
 
