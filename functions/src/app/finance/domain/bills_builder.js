@@ -28,7 +28,7 @@ exports.buildBills = function(html) {
   });
 
   return {
-    "bills": result,
+    "data": result,
   };
 };
 

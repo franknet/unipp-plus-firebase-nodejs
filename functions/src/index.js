@@ -1,16 +1,18 @@
 /* eslint-disable max-len */
 
-const admin = require("firebase-admin");
-admin.initializeApp();
+require("firebase-admin").initializeApp();
 
 const {onCall} = require("./utils/https-function");
-const {signInHandler} = require("./app/sign_in/controller");
-const {fetchGradesHandler} = require("./app/grades/controller");
-const {fetchAcademicRecordsHandler} = require("./app/academic_records/controller");
-const {fetchExtractHandler, fetchBillshandler} = require("./app/finance/controller");
 
-exports.sign_in = onCall(signInHandler);
-exports.fetch_grades = onCall(fetchGradesHandler);
-exports.fetch_academic_records = onCall(fetchAcademicRecordsHandler);
-exports.fetch_extract = onCall(fetchExtractHandler);
-exports.fetch_bills = onCall(fetchBillshandler);
+const app = require("./app");
+exports.sign_in = onCall(app.signIn.signInHandler);
+exports.fetch_notifications = onCall(app.notifications.fetchNotificationsHandler);
+exports.fetch_grades = onCall(app.grades.fetchGradesHandler);
+exports.fetch_academic_records = onCall(app.academicRecords.fetchAcademicRecordsHandler);
+exports.fetch_extract = onCall(app.finance.fetchExtractHandler);
+exports.fetch_bills = onCall(app.finance.fetchBillshandler);
+
+const eadApp = require("./app_ead");
+exports.ead_fetch_notifications = onCall(eadApp.notifications.fetchNotificationsHandler);
+exports.ead_fetch_grades = onCall(eadApp.grades.fetchGradesHandler);
+exports.ead_fetch_academic_records = onCall(eadApp.academicRecords.fetchAcademicRecordsHandler);

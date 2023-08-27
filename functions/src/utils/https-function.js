@@ -2,8 +2,7 @@
 const {https} = require("firebase-functions/v2");
 
 /**
- * @param {functionsV2.CallableRequest} handler
- * @returns {functionsV2.CallableFunction}
+ * @param {import("firebase-functions/v2/https").CallableRequest} handler
  */
 exports.onCall = (handler) => https.onCall({
   region: "southamerica-east1",

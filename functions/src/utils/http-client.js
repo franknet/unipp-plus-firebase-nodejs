@@ -10,18 +10,18 @@ axios.defaults.maxRedirects = 0;
 axios.defaults.method = "get";
 axios.interceptors.response.use(responseInterceptor);
 
+const ACCEPTED_CONTENT_TYPES = [
+  "application/json",
+  "application/json; charset=utf-8",
+  "text/plain",
+  "text/plain; charset=utf-8",
+];
+
 /**
  * @param {import("axios").AxiosResponse<any, any>} response
  * @returns {import("axios").AxiosResponse<any, any>}
  */
 function responseInterceptor(response) {
-  const acceptedContentTypes = [
-    "application/json",
-    "application/json; charset=utf-8",
-    "text/plain",
-    "text/plain; charset=utf-8",
-  ];
-
   const log = {
     request: {
       method: response.config.method,
@@ -34,6 +34,9 @@ function responseInterceptor(response) {
       headers: response.headers,
     },
   };
+  if (ACCEPTED_CONTENT_TYPES.includes(response.headers["content-type"])) {
+    log.response["data"] = response.data;
+  }
   debugLog("HttpClient", log);
   return response;
 }

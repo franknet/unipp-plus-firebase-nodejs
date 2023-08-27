@@ -21,9 +21,11 @@ exports.buildGrades = (nfHtml, meHtml) => {
   let totalAvg = _.reduce(disciplines, addAvg, 0);
   totalAvg = _.round(totalAvg / disciplines.length, 1);
   return {
-    "totalAvg": totalAvg,
-    "disciplines": _.groupBy(disciplines, "type"),
-    "lastReleased": lastReleased,
+    "data": {
+      "totalAvg": totalAvg,
+      "disciplines": _.groupBy(disciplines, "type"),
+      "lastReleased": lastReleased,
+    },
   };
 };
 

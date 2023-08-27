@@ -39,8 +39,10 @@ exports.buildExtract = function(html) {
   refactorPayments(payments);
   const totalPaid = _.sumBy(payments, "valuePaid");
   return {
-    "totalPaid": toCurrency(_.round(totalPaid, 2)),
-    "paymentTypes": paymentTypes(payments),
+    "data": {
+      "totalPaid": toCurrency(_.round(totalPaid, 2)),
+      "paymentTypes": paymentTypes(payments),
+    },
   };
 };
 
@@ -55,10 +57,17 @@ function refactorPayments(payments) {
 }
 
 function paymentStatus(payment) {
-  return {
+  const status = {
     "code": ACCEPTED_STATUS.includes(payment["status"]) ? 1 : 0,
-    "message": payment["status"] === "OK" ? `Pago no dia ${payment["paymentDate"]}` : payment["status"] === "ABONO" ? "Pagamento abonado" : `Vence no dia ${payment["dueDate"]}`,
   };
+  if (payment["status"] == "OK") {
+    status["message"] = `Pago no dia ${payment["paymentDate"]}`;
+  } else if (payment["status"] == "ABONO") {
+    status["message"] = "Pagamento abonado";
+  } else {
+    status["message"] = `Vence no dia ${payment["dueDate"]}`;
+  }
+  return status;
 }
 
 function paymentTypes(payments) {

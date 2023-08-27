@@ -1,3 +1,4 @@
+/* eslint-disable valid-jsdoc */
 /* eslint-disable require-jsdoc */
 /* eslint-disable max-len */
 
@@ -8,7 +9,8 @@ const repository = require("../data/repository");
 const eadSignInUseCase = require("../../../app_ead/sign_in/domain/use-case");
 const {buildUser, findPhotoSrc} = require("./builder");
 
-exports.signIn = async function(credentials) {
+
+exports.signIn = async (credentials) => {
   try {
     const {data} = await repository.signIn({
       identificacao: credentials["id"],
@@ -45,8 +47,10 @@ async function fetchSec(cookie, secUrl, loginData, systemsData) {
   await repository.fetchSec(secCookie, secHomeUrl);
   await saveUserPhoto(secCookie, loginData);
   return {
-    "cookie": secCookie,
-    "user": buildUser(loginData, systemsData),
+    "data": {
+      "cookie": secCookie,
+      "user": buildUser(loginData, systemsData),
+    },
   };
 }
 

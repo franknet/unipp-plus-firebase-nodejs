@@ -2,7 +2,7 @@
 /* eslint-disable max-len */
 
 const API = require("./api");
-const Storage = require("firebase-admin").storage().bucket();
+const Storage = require("firebase-admin").storage().bucket("photos");
 const {Status} = require("../../../utils/status-code-validations");
 
 /**
@@ -20,7 +20,7 @@ exports.fetchSec = (cookie, secUrl) => API.fetch({
 
 exports.fetchStudentPhoto = (cookie) => API.fetchStudentPhoto(cookie);
 
-exports.fetchUserPhotoFile = (userRg) => Storage.file(`photos/${userRg}.png`);
+exports.fetchUserPhotoFile = (userRg) => Storage.file(`${userRg}.png`);
 
 /**
  * @param {File} file

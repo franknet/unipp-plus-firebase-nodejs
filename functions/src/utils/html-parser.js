@@ -36,3 +36,20 @@ exports.getElementById = function(html, id) {
     "attrs": $(obj).attr(),
   };
 };
+
+exports.getElementByClass = function(html, className) {
+  const $ = parser.load(html);
+  const elements = $(`.${className}`);
+
+  if (_.isNil(elements)) {
+    return null;
+  }
+
+  return $(elements).map((i, el) => {
+    return {
+      "value": $(this).val(),
+      "text": $(this).text(),
+      "attrs": $(this).attr(),
+    };
+  });
+};

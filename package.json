@@ -2,6 +2,7 @@
   "dependencies": {
     "currency-formatter": "^1.5.9",
     "install": "^0.13.0",
-    "npm": "^9.8.1"
+    "npm": "^9.8.1",
+    "turndown": "^7.1.2"
   }
 }

@@ -4,6 +4,7 @@
 
 const {AxiosError} = require("axios");
 const {HttpsError} = require("firebase-functions").https;
+const {debugLog} = require("../utils/logger");
 
 class SessionExpired extends HttpsError {
   constructor() {
@@ -40,6 +41,7 @@ class FileAlreadyExists extends HttpsError {
  * @returns {HttpsError}
  */
 const onError = (error) => {
+  debugLog("onError", error);
   if (error instanceof HttpsError) {
     return error;
   } else if (error instanceof AxiosError) {

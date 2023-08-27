@@ -35,7 +35,7 @@ const saveBankSlipPDF = async function(session, bill) {
   try {
     const bankSlipId = bill["bankSlipId"];
     const userRg = session["user"]["rg"];
-    const file = repository.fetchBankSlipPDFFile(`bank_slips/${userRg}/${bankSlipId}.pdf`);
+    const file = repository.fetchBankSlipPDFFile(`${userRg}/${bankSlipId}.pdf`);
     const exists = await file.exists()[0];
     if (exists) {
       return false;

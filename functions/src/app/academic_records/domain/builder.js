@@ -10,7 +10,9 @@ const tableClass = "table-striped";
 exports.buildRecords = function(html) {
   const subjects = parseHTML(html);
   const semesters = _.groupBy(subjects, "semester");
-  return refactorSemesters(semesters);
+  return {
+    "data": refactorSemesters(semesters),
+  };
 };
 
 function parseHTML(html) {

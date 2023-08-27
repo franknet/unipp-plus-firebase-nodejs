@@ -2,7 +2,7 @@
 /* eslint-disable max-len */
 
 const API = require("./api");
-const Storage = require("firebase-admin").storage().bucket();
+const Storage = require("firebase-admin").storage().bucket("bank_slips");
 
 exports.fetchExtract = (session) => API.fetchExtract(session);
 

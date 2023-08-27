@@ -10,15 +10,17 @@ exports.signIn = async (data, systems) => {
       password: data["password"],
       pagina: "",
     });
-    const cookie = sessionResponse["cookie"];
-    const session = sessionResponse["data"];
+    const cookie = sessionResponse.headers["set-cookie"];
+    const session = sessionResponse.data;
     const userId = session["id"];
-    const userCode = session["login"];
-    const contractResponse = await repository.fetchContract(cookie, userCode);
+    const userRg = session["login"];
+    const contractResponse = await repository.fetchContract(cookie, userRg);
     const userResponse = await repository.fetchUser(cookie, userId);
     return {
-      "cookie": cookie,
-      "user": userBuilder.from(userResponse.data, contractResponse.data, systems),
+      data: {
+        "cookie": cookie,
+        "user": userBuilder.from(userResponse.data, contractResponse.data, systems),
+      },
     };
   } catch (error) {
     throw onError(error);

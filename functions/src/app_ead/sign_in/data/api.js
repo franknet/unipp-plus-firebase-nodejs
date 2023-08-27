@@ -9,8 +9,8 @@ exports.singIn = (credentials) => request({
   validateStatus: Status.Ok,
 });
 
-exports.fetchContract = (cookie, userCode) => request({
-  url: `https://gfa.unip.br/aluno/apix/pessoas/cod_aluno/${userCode}/verifica_exibe_contrato_login`,
+exports.fetchContract = (cookie, userRg) => request({
+  url: `https://gfa.unip.br/aluno/apix/pessoas/cod_aluno/${userRg}/verifica_exibe_contrato_login`,
   headers: {"Cookie": cookie},
   validateStatus: Status.Ok,
 });
