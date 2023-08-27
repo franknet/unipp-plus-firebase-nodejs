@@ -12,9 +12,7 @@ axios.interceptors.response.use(responseInterceptor);
 
 const ACCEPTED_CONTENT_TYPES = [
   "application/json",
-  "application/json; charset=utf-8",
   "text/plain",
-  "text/plain; charset=utf-8",
 ];
 
 /**
@@ -34,7 +32,7 @@ function responseInterceptor(response) {
       headers: response.headers,
     },
   };
-  if (ACCEPTED_CONTENT_TYPES.includes(response.headers["content-type"])) {
+  if (ACCEPTED_CONTENT_TYPES.includes(response.headers["content-type"].split(";")[0])) {
     log.response["data"] = response.data;
   }
   debugLog("HttpClient", log);

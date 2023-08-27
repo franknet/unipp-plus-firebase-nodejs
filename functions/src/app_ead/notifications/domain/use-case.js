@@ -40,7 +40,7 @@ const saveAttachment = async (session, notification, attachment) => {
     if (existis) {
       return true;
     }
-    const {data} = repository.downloadAttachment(session, notification["id"], attachment["idAnexo"]);
+    const {data} = await repository.downloadAttachment(session, notification["id"], attachment["idAnexo"]);
     return await repository.saveAttachmentFile(file, data);
   } catch (error) {
     trackError(error);
