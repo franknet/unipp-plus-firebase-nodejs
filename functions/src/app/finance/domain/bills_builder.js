@@ -2,13 +2,12 @@
 /* eslint-disable max-len */
 
 const _ = require("lodash");
-const {toNumber, toCurrency} = require("../../../utils/number-utils");
-const HTMLParser = require("../../../utils/html-parser");
-// const {logObject} = require("../../../../utils/logger");
+const { Number } = require("../../../core").Utils;
+const { HtmlParser } = require("../../../core").Http;
 
 exports.buildBills = function(html) {
   const fields = ["seq", "install", "docType", "paymentPlan", "dueDate", "docValue", "paymentDate", "valuePaid", "reversalDate", "reversalValue", "status", "paymentMethods"];
-  const bills = HTMLParser.table(html, "table-striped", fields, "html");
+  const bills = HtmlParser.table(html, "table-striped", fields, "html");
   const result = [];
 
   // join extract and bills list, and add new fields
@@ -20,9 +19,9 @@ exports.buildBills = function(html) {
     bill["bankSlipId"] = setBankSlipId(bill["paymentMethods"]);
     bill["status"] = bill["status"] === "OK" ? `Pago no dia ${bill["paymentDate"]}` : `Vence no dia ${bill["dueDate"]}`;
     bill["seq"] = bill["seq"].split("/").reverse().join("/");
-    bill["docValue"] = toCurrency(toNumber(docValue));
-    bill["valuePaid"] = toCurrency(toNumber(valuePaid));
-    bill["reversalValue"] = toCurrency(toNumber(reversalValue));
+    bill["docValue"] = Number.toCurrency(toNumber(docValue));
+    bill["valuePaid"] = Number.toCurrency(toNumber(valuePaid));
+    bill["reversalValue"] = Number.toCurrency(toNumber(reversalValue));
 
     result.push(_.omit(bill, ["paymentMethods"]));
   });

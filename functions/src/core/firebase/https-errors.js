@@ -2,9 +2,9 @@
 /* eslint-disable require-jsdoc */
 /* eslint-disable max-len */
 
-const {AxiosError} = require("axios");
-const {HttpsError} = require("firebase-functions").https;
-const {debugLog} = require("../utils/logger");
+const { AxiosError } = require("axios");
+const { HttpsError } = require("firebase-functions").https;
+const Logger = require("./logger");
 
 class SessionExpired extends HttpsError {
   constructor() {
@@ -41,7 +41,7 @@ class FileAlreadyExists extends HttpsError {
  * @returns {HttpsError}
  */
 const onError = (error) => {
-  debugLog("onError", error);
+  Logger.debug("onError", error);
   if (error instanceof HttpsError) {
     return error;
   } else if (error instanceof AxiosError) {

@@ -2,8 +2,9 @@
 /* eslint-disable max-len */
 
 const _ = require("lodash");
-const {toNumber} = require("../../../utils/number-utils");
-const {table} = require("../../../utils/html-parser");
+const { Number } = require("../../../core").Utils;
+const { HtmlParser } = require("../../../core").Http;
+
 const labels = ["semester", "code", "name", "workload", "avg", "year", "status"];
 const tableClass = "table-striped";
 
@@ -16,7 +17,7 @@ exports.buildRecords = function(html) {
 };
 
 function parseHTML(html) {
-  const subjects = table(html, tableClass, labels);
+  const subjects = HtmlParser.table(html, tableClass, labels);
   return _.filter(subjects, filterEmptySubjects);
 }
 
@@ -56,10 +57,10 @@ function addValidAvg(result, discipline) {
     avg = "10";
   }
   if (!_.includes(invalidDisciplineStatus, status)) {
-    result += toNumber(avg);
+    result += Number.toNumber(avg);
   }
 
-  discipline["avg"] = toNumber(avg);
+  discipline["avg"] = Number.toNumber(avg);
   return result;
 }
 

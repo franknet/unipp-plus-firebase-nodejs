@@ -1,7 +1,7 @@
 
-const {fetchNF, fetchME} = require("../data/repository");
-const {buildGrades} = require("./builder");
-const {onError} = require("../../../utils/https-errors");
+const { fetchNF, fetchME } = require("../data/repository");
+const { buildGrades } = require("./builder");
+const { Errors } = require("../../../core").Firebase;
 
 exports.fetchGrades = async (session) => {
   try {
@@ -9,6 +9,6 @@ exports.fetchGrades = async (session) => {
     const meResponse = await fetchME(session);
     return buildGrades(nfResponse.data, meResponse.data);
   } catch (error) {
-    throw onError(error);
+    throw Errors.onError(error);
   }
 };

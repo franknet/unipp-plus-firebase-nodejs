@@ -7,7 +7,7 @@ const isDebug = process.env["FIREBASE_DEBUG_MODE"] == "true";
  * @param {Error} error
  */
 exports.trackError = (error) => logger.error(error);
-exports.debugLog = (tag, args) => {
+exports.debug = (tag, args) => {
   if (!isDebug) {
     return;
   }

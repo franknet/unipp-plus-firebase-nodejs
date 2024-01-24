@@ -3,8 +3,8 @@
 /* eslint-disable max-len */
 
 const _ = require("lodash");
-const {toNumber, toCurrency} = require("../../../utils/number-utils");
-const HTMLParser = require("../../../utils/html-parser");
+const { Number } = require("../../../core").Utils;
+const { HtmlParser } = require("../../../core").Http;
 // const {log} = require("../../../../utils/logger");
 
 const PAYMENT_TYPE = {
@@ -35,12 +35,12 @@ const TABLE_COLUMNS = [
 ];
 
 exports.buildExtract = function(html) {
-  const payments = HTMLParser.table(html, "table-striped", TABLE_COLUMNS);
+  const payments = HtmlParser.table(html, "table-striped", TABLE_COLUMNS);
   refactorPayments(payments);
   const totalPaid = _.sumBy(payments, "valuePaid");
   return {
     "data": {
-      "totalPaid": toCurrency(_.round(totalPaid, 2)),
+      "totalPaid": Number.toCurrency(_.round(totalPaid, 2)),
       "paymentTypes": paymentTypes(payments),
     },
   };
@@ -50,9 +50,9 @@ function refactorPayments(payments) {
   _.forEach(_.reverse(payments), (payment, index) => {
     payment["status"] = paymentStatus(payment);
     payment["seq"] = payment["seq"].split("/").reverse().join("/");
-    payment["docValue"] = toNumber(_.replace(payment["docValue"], "R$", ""));
-    payment["valuePaid"] = toNumber(_.replace(payment["valuePaid"], "R$", ""));
-    payment["reversalValue"] = toNumber(_.replace(payment["reversalValue"], "R$", ""));
+    payment["docValue"] = Number.toNumber(_.replace(payment["docValue"], "R$", ""));
+    payment["valuePaid"] = Number.toNumber(_.replace(payment["valuePaid"], "R$", ""));
+    payment["reversalValue"] = Number.toNumber(_.replace(payment["reversalValue"], "R$", ""));
   });
 }
 
@@ -77,13 +77,13 @@ function paymentTypes(payments) {
     _.forEach(groupPayments, (payment, index) => {
       const nextPayment = groupPayments[index + 1];
       payment["difference"] = calcDifference(payment, nextPayment);
-      payment["valuePaid"] = toCurrency(payment["valuePaid"]);
-      payment["docValue"] = toCurrency(payment["docValue"]);
-      payment["reversalValue"] = toCurrency(payment["reversalValue"]);
+      payment["valuePaid"] = Number.toCurrency(payment["valuePaid"]);
+      payment["docValue"] = Number.toCurrency(payment["docValue"]);
+      payment["reversalValue"] = Number.toCurrency(payment["reversalValue"]);
     });
 
     return {
-      "totalPaid": toCurrency(_.round(totalGroupValue, 2)),
+      "totalPaid": Number.toCurrency(_.round(totalGroupValue, 2)),
       "type": groupType,
       "typeName": PAYMENT_TYPE[groupType],
       "payments": groupPayments,
@@ -98,6 +98,6 @@ function calcDifference(payment, nextPayment) {
   const diferrenceValue = _.round(payment["docValue"] - nextPayment["docValue"], 2);
   return {
     "code": diferrenceValue > 0 ? -1 : diferrenceValue == 0 ? 0 : 1,
-    "value": toCurrency(diferrenceValue),
+    "value": Number.toCurrency(diferrenceValue),
   };
 }

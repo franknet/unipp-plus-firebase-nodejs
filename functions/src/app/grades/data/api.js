@@ -1,14 +1,14 @@
-const {request} = require("../../../utils/http-client");
-const {Status} = require("../../../utils/status-code-validations");
 
-exports.fetchNF = (session) => request({
+const { HttpClient, HttpStatus } = require("../../../core").Http;
+
+exports.fetchNF = (session) => HttpClient.request({
   url: "https://sec2.unip.br/NovaSecretaria/NotasFaltasMediaFinal/NotasFaltasMediaFinal",
-  headers: {"Cookie": session["cookie"]},
-  validateStatus: Status.Ok,
+  headers: { "Cookie": session["cookie"] },
+  validateStatus: HttpStatus.Ok
 });
 
-exports.fetchME = (session) => request({
+exports.fetchME = (session) => HttpClient.request({
   url: "https://sec2.unip.br/NovaSecretaria/MediasExamesFinais/MediasExamesFinais",
-  headers: {"Cookie": session["cookie"]},
-  validateStatus: Status.Ok,
+  headers: { "Cookie": session["cookie"] },
+  validateStatus: HttpStatus.Ok
 });

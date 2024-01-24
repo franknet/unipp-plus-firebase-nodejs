@@ -1,22 +1,24 @@
-const {request} = require("../../../utils/http-client");
-const {Status} = require("../../../utils/status-code-validations");
+/* eslint-disable max-len */
+/* eslint-disable valid-jsdoc */
 
-exports.singIn = (credentials) => request({
+const { HttpClient, HttpStatus } = require("../../../core").Http;
+
+exports.singIn = (credentials) => HttpClient.request({
   url: "https://gfa.unip.br/aluno/auth",
   method: "post",
-  headers: {"Content-Type": "application/x-www-form-urlencoded"},
+  headers: { "Content-Type": "application/x-www-form-urlencoded" },
   data: credentials,
-  validateStatus: Status.Ok,
+  validateStatus: HttpStatus.Ok
 });
 
-exports.fetchContract = (cookie, userRg) => request({
+exports.fetchContract = (cookie, userRg) => HttpClient.request({
   url: `https://gfa.unip.br/aluno/apix/pessoas/cod_aluno/${userRg}/verifica_exibe_contrato_login`,
-  headers: {"Cookie": cookie},
-  validateStatus: Status.Ok,
+  headers: { "Cookie": cookie },
+  validateStatus: HttpStatus.Ok
 });
 
-exports.fetchUser = (cookie, userId) => request({
+exports.fetchUser = (cookie, userId) => HttpClient.request({
   url: `https://gfa.unip.br/aluno/apix/api/rest/alunos/user/${userId}`,
-  headers: {"Cookie": cookie},
-  validateStatus: Status.Ok,
+  headers: { "Cookie": cookie },
+  validateStatus: HttpStatus.Ok
 });

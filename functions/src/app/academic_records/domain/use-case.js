@@ -1,12 +1,12 @@
-const repository = require("../data/repository");
-const {buildRecords} = require("./builder");
-const {onError} = require("../../../utils/https-errors");
+const Repository = require("../data/repository");
+const Builder = require("./builder");
+const { Errors } = require("../../../core").Firebase;
 
 exports.fetchAcademicRecords = async (session) => {
   try {
-    const {data} = await repository.fetchAcademicRecords(session);
-    return buildRecords(data);
+    const {data} = await Repository.fetchAcademicRecords(session);
+    return Builder.buildRecords(data);
   } catch (error) {
-    throw onError(error);
+    throw Errors.onError(error);
   }
 };

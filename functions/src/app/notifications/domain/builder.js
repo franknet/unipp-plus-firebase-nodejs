@@ -4,7 +4,6 @@
 
 const cheerio = require("cheerio");
 const TurndownService = require("turndown");
-const {debugLog} = require("../../../utils/logger");
 
 exports.buildNotifications = (html) => {
   const notifications = [];
@@ -12,7 +11,6 @@ exports.buildNotifications = (html) => {
   const notificationsNodes = $(".modal-body", "#carrosselPopupDskMob");
   notificationsNodes.each((i, elem) => {
     const markdownText = new TurndownService().turndown($(elem).html());
-    debugLog("notification", markdownText);
     notifications.push(markdownText);
   });
   return {

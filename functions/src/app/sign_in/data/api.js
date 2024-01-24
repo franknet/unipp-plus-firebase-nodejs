@@ -1,37 +1,25 @@
 /* eslint-disable valid-jsdoc */
 
-const {request} = require("../../../utils/http-client");
-const {Status} = require("../../../utils/status-code-validations");
+const { HttpClient, HttpStatus } = require("../../../core").Http;
 
-exports.singIn = (credentials) => request({
+exports.singIn = (credentials) => HttpClient.request({
   url: "https://sistemasunip.unip.br/api-autenticacao/autenticacao/login",
   method: "post",
-  headers: {"Content-Type": "application/json"},
+  headers: { "Content-Type": "application/json" },
   data: credentials,
-  validateStatus: Status.Ok,
+  validateStatus: HttpStatus.Ok,
 });
 
-exports.fetchSystems = (token) => request({
+exports.fetchSystems = (token) => HttpClient.request({
   url: "https://sistemasunip.unip.br/api-autenticacao/sistemas/usuario",
-  headers: {"Authorization": token},
-  validateStatus: Status.Ok,
+  headers: { "Authorization": token },
+  validateStatus: HttpStatus.Ok,
 });
 
-exports.fetchStudentPhoto = (cookie) => request({
+exports.fetchStudentProfile = (cookie) => HttpClient.request({
   url: "https://sec2.unip.br/NovaSecretaria/CadastroSecretariaOnline/CadastroSecretariaOnline",
-  headers: {"Cookie": cookie},
-  validateStatus: Status.Ok,
+  headers: { "Cookie": cookie },
+  validateStatus: HttpStatus.Ok,
 });
 
-/**
- * @param {{
- * cookie: any,
- * url: string,
- * validateStatus: ((int) => boolean)
- * }} config
- */
-exports.fetch = (config) => request({
-  url: config.url,
-  headers: {"Cookie": config.cookie},
-  validateStatus: config.validateStatus,
-});
+exports.fetch = (config) => HttpClient.request(config);

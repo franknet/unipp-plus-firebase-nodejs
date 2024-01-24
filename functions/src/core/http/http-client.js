@@ -3,7 +3,7 @@
 /* eslint-disable require-jsdoc */
 /* eslint-disable max-len */
 
-const {debugLog} = require("./logger");
+const Logger = require("../firebase/logger");
 const axios = require("axios").default;
 axios.defaults.headers.common["User-Agent"] = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/109.0";
 axios.defaults.maxRedirects = 0;
@@ -35,7 +35,7 @@ function responseInterceptor(response) {
   if (ACCEPTED_CONTENT_TYPES.includes(response.headers["content-type"].split(";")[0])) {
     log.response["data"] = response.data;
   }
-  debugLog("HttpClient", log);
+  Logger.debug("HttpClient", log);
   return response;
 }
 

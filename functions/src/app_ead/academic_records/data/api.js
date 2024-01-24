@@ -1,16 +1,16 @@
 /* eslint-disable max-len */
 /* eslint-disable valid-jsdoc */
-const {request} = require("../../../utils/http-client");
-const {Status} = require("../../../utils/status-code-validations");
 
-exports.fetchCourseInfo = (session) => request({
+const { HttpClient, HttpStatus } = require("../../../core").Http;
+
+exports.fetchCourseInfo = (session) => HttpClient.request({
   url: `https://gfa.unip.br/aluno/apix/matricula/aluno/${session["user"]["id"]}/listarHistoricoSimplificado`,
-  headers: {"Cookie": session["cookie"]},
-  validateStatus: Status.Ok,
+  headers: { "Cookie": session["cookie"] },
+  validateStatus: HttpStatus.Ok
 });
 
-exports.fetchDisciplines = (session) => request({
+exports.fetchDisciplines = (session) => HttpClient.request({
   url: `https://gfa.unip.br/aluno/apix/matricula/aluno/${session["user"]["id"]}/listarCabecalhoHistorico`,
-  headers: {"Cookie": session["cookie"]},
-  validateStatus: Status.Ok,
+  headers: { "Cookie": session["cookie"] },
+  validateStatus: HttpStatus.Ok
 });

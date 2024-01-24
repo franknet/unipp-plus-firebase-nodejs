@@ -1,21 +1,21 @@
 /* eslint-disable max-len */
 /* eslint-disable valid-jsdoc */
-const {request} = require("../../../utils/http-client");
-const {Status} = require("../../../utils/status-code-validations");
 
-exports.fetchGrades = (session) => request({
+const { HttpClient, HttpStatus } = require("../../../core").Http;
+
+exports.fetchGrades = (session) => HttpClient.request({
   url: `https://gfa.unip.br/aluno/apix/pessoas/${session["user"]["id"]}/alunos/${session["user"]["rg"]}/boletim`,
-  headers: {"Cookie": session["cookie"]},
-  validateStatus: Status.Ok,
+  headers: { "Cookie": session["cookie"] },
+  validateStatus: HttpStatus.Ok
 });
 
-exports.fetchReleasedGrades = (session) => request({
+exports.fetchReleasedGrades = (session) => HttpClient.request({
   url: `https://gfa.unip.br/aluno/apix/pessoas/${session["user"]["id"]}/alunos/${session["user"]["rg"]}/ultimasNotas`,
-  headers: {"Cookie": session["cookie"]},
-  validateStatus: Status.Ok,
+  headers: { "Cookie": session["cookie"] },
+  validateStatus: HttpStatus.Ok
 });
 
-exports.fetchAttendanceDetails = (session, config) => request({
+exports.fetchAttendanceDetails = (session, config) => HttpClient.request({
   url: "https://gfa.unip.br/aluno/apix/pessoas/lista_detalhes_frequencia",
   method: "post",
   headers: {
@@ -23,5 +23,5 @@ exports.fetchAttendanceDetails = (session, config) => request({
     "Cookie": session["cookie"],
   },
   json: config,
-  validateStatus: Status.Ok,
+  validateStatus: HttpStatus.Ok
 });
