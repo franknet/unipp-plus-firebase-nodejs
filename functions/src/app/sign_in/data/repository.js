@@ -11,10 +11,9 @@ exports.signIn = (credentials) => Api.singIn(credentials);
  */
 exports.fetchSystems = (token) => Api.fetchSystems(token);
 /**
- * @param {import("axios").AxiosRequestConfig} config
  * @returns {Promise<import("axios").AxiosResponse>}
  */
-exports.fetch = (config) => Api.fetch(config);
+exports.fetchSec = (url) => Api.fetchSec(url);
 /**
  * @returns {Promise<import("axios").AxiosResponse>}
  */
