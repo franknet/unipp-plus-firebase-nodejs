@@ -3,9 +3,9 @@
 
 const _ = require("lodash");
 
-exports.from = (userData, contract, systems) => {
+exports.build = (userData, contractData, systemsData) => {
   const user = userData["content"][0];
-  const isContractSigned = contract["valor"];
+  const isContractSigned = contractData["valor"];
   const userStatus = (isContractSigned ? "SignContract" : user["semestre"]) == null ? "Enroll" : user["situacaoAluno"];
 
   return {
@@ -16,7 +16,7 @@ exports.from = (userData, contract, systems) => {
     "photo": user["foto"],
     "status": userStatus,
     "isEad": true,
-    "cardId": cardId(systems),
+    "cardId": cardId(systemsData),
     "course": course(user),
   };
 };

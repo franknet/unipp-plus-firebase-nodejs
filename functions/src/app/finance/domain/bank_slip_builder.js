@@ -1,7 +1,7 @@
 /* eslint-disable require-jsdoc */
 /* eslint-disable max-len */
 
-const { HtmlParser } = require("../../../core").Http;
+const {HtmlParser} = require("up-core").Http;
 
 exports.buildBankSlipParams = function(html) {
   const params = new URLSearchParams();

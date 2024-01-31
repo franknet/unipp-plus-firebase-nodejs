@@ -1,19 +1,20 @@
 
 
-const {onError} = require("../../../utils/https-errors");
-const {fetchCourseInfo, fetchDisciplines} = require("../data/repository");
-const {buildAcademicRecords} = require("./builder");
+const {Errors} = require("up-core").Firebase;
+const Repository = require("../data/repository");
+const Builder = require("./builder");
 
 exports.fetchAcademicRecords = async (session) => {
   try {
     const responses = await Promise.all([
-      fetchCourseInfo(session),
-      fetchDisciplines(session),
+      Repository.fetchCourseInfo(session),
+      Repository.fetchDisciplines(session),
     ]);
     return {
-      "data": buildAcademicRecords(responses[0].data, responses[1].data),
+      // eslint-disable-next-line max-len
+      "data": Builder.buildAcademicRecords(responses[0].data, responses[1].data),
     };
   } catch (error) {
-    throw onError(error);
+    throw Errors.onError(error);
   }
 };

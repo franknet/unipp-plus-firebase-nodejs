@@ -2,8 +2,8 @@
 /* eslint-disable max-len */
 
 const _ = require("lodash");
-const { Number } = require("../../../core").Utils;
-const { HtmlParser } = require("../../../core").Http;
+const {Number} = require("up-core").Utils;
+const {HtmlParser} = require("up-core").Http;
 
 exports.buildBills = function(html) {
   const fields = ["seq", "install", "docType", "paymentPlan", "dueDate", "docValue", "paymentDate", "valuePaid", "reversalDate", "reversalValue", "status", "paymentMethods"];
@@ -19,9 +19,9 @@ exports.buildBills = function(html) {
     bill["bankSlipId"] = setBankSlipId(bill["paymentMethods"]);
     bill["status"] = bill["status"] === "OK" ? `Pago no dia ${bill["paymentDate"]}` : `Vence no dia ${bill["dueDate"]}`;
     bill["seq"] = bill["seq"].split("/").reverse().join("/");
-    bill["docValue"] = Number.toCurrency(toNumber(docValue));
-    bill["valuePaid"] = Number.toCurrency(toNumber(valuePaid));
-    bill["reversalValue"] = Number.toCurrency(toNumber(reversalValue));
+    bill["docValue"] = Number.toCurrency(Number.toNumber(docValue));
+    bill["valuePaid"] = Number.toCurrency(Number.toNumber(valuePaid));
+    bill["reversalValue"] = Number.toCurrency(Number.toNumber(reversalValue));
 
     result.push(_.omit(bill, ["paymentMethods"]));
   });

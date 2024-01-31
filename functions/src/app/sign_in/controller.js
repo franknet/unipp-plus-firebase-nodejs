@@ -1,5 +1,5 @@
 /* eslint-disable valid-jsdoc */
 
-const { signIn } = require("./domain/use-case");
+const UserCase = require("./domain/use_case/use-case");
 
-exports.signInHandler = (request) => signIn(request.data);
+exports.signInHandler = (request) => UserCase.signIn(request.data);

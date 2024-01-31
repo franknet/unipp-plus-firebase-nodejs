@@ -5,7 +5,7 @@ const repository = require("../data/repository");
 const {buildExtract} = require("./extract_builder");
 const {buildBills} = require("./bills_builder");
 const {buildBankSlipParams} = require("./bank_slip_builder");
-const { Errors, Logger } = require("../../../core").Firebase;
+const {Errors, Logger} = require("up-core").Firebase;
 
 exports.fetchExtract = async function(session) {
   try {

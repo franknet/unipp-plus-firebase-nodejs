@@ -2,8 +2,8 @@
 /* eslint-disable max-len */
 
 const _ = require("lodash");
-const { Number } = require("../../../core").Utils;
-const { HtmlParser } = require("../../../core").Http;
+const {Number} = require("up-core").Utils;
+const {HtmlParser} = require("up-core").Http;
 
 const labels = ["semester", "code", "name", "workload", "avg", "year", "status"];
 const tableClass = "table-striped";
@@ -11,9 +11,7 @@ const tableClass = "table-striped";
 exports.buildRecords = function(html) {
   const subjects = parseHTML(html);
   const semesters = _.groupBy(subjects, "semester");
-  return {
-    "data": refactorSemesters(semesters),
-  };
+  return refactorSemesters(semesters);
 };
 
 function parseHTML(html) {

@@ -14,7 +14,7 @@ const genderStatusMessage = {
   },
 };
 
-exports.buildUser = function(user, systems) {
+exports.buildUser = function(user, systems, photoUrl) {
   return {
     "rg": user["identificacao"],
     "name": user["nomeUsuario"],
@@ -23,6 +23,7 @@ exports.buildUser = function(user, systems) {
     "isEad": false,
     "cardId": cardId(systems),
     "course": course(user),
+    "photoUrl": photoUrl,
   };
 };
 

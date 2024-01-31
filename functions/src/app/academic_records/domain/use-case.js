@@ -1,12 +1,16 @@
+
+const {Errors} = require("up-core").Firebase;
 const Repository = require("../data/repository");
 const Builder = require("./builder");
-const { Errors } = require("../../../core").Firebase;
 
-exports.fetchAcademicRecords = async (session) => {
-  try {
-    const {data} = await Repository.fetchAcademicRecords(session);
-    return Builder.buildRecords(data);
-  } catch (error) {
-    throw Errors.onError(error);
-  }
-};
+// eslint-disable-next-line max-len
+exports.fetchAcademicRecords = (session) => Repository.fetchAcademicRecords(session)
+    .then(onFetchAcademicRecords)
+    .catch(Errors.onError);
+
+// eslint-disable-next-line require-jsdoc
+function onFetchAcademicRecords(data) {
+  return {
+    "data": Builder.buildRecords(data),
+  };
+}

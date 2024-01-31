@@ -1,28 +1,24 @@
 /* eslint-disable max-len */
 
-const {
-  fetchGrades,
-  fetchReleasedGrades,
-  fetchAttendanceDetails,
-} = require("../data/repository");
-const {onError} = require("../../../utils/https-errors");
-const builder = require("./builder");
+const {Errors} = require("up-core").Firebase;
+const Repository = require("../data/repository");
+const Builder = require("./builder");
 
 exports.fetchGrades = async (session) => {
   try {
-    const gradesResponse = await fetchGrades(session);
-    const releasedGradesResponse = await fetchReleasedGrades(session);
-    return builder.buildGrades(gradesResponse.data, releasedGradesResponse.data);
+    const gradesResponse = await Repository.fetchGrades(session);
+    const releasedGradesResponse = await Repository.fetchReleasedGrades(session);
+    return Builder.buildGrades(gradesResponse.data, releasedGradesResponse.data);
   } catch (error) {
-    throw onError(error);
+    throw Errors.onError(error);
   }
 };
 
 exports.fetchAttendanceDetails = async (session) => {
   try {
-    const {data} = await fetchAttendanceDetails(session);
+    const {data} = await Repository.fetchAttendanceDetails(session);
     return data;
   } catch (error) {
-    throw onError(error);
+    throw Errors.onError(error);
   }
 };

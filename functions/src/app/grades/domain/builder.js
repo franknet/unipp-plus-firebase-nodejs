@@ -3,8 +3,8 @@
 /* eslint-disable require-jsdoc */
 
 const _ = require("lodash");
-const { Number } = require("../../../core").Utils;
-const { HtmlParser } = require("../../../core").Http;
+const {Number} = require("up-core").Utils;
+const {HtmlParser} = require("up-core").Http;
 
 const nfLabels = ["cod", "discipline", "special", "type", "obs", "np1", "np2", "mf", "obsences"];
 const meLabels = ["cod", "discipline", "special", "type", "obs", "obsences", "ms", "ex", "mf"];

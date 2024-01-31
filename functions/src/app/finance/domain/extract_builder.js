@@ -3,9 +3,8 @@
 /* eslint-disable max-len */
 
 const _ = require("lodash");
-const { Number } = require("../../../core").Utils;
-const { HtmlParser } = require("../../../core").Http;
-// const {log} = require("../../../../utils/logger");
+const {Number} = require("up-core").Utils;
+const {HtmlParser} = require("up-core").Http;
 
 const PAYMENT_TYPE = {
   MS: "Mensalidade",

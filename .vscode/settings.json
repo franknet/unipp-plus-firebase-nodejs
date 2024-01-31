@@ -1,8 +1,8 @@
 {
     "eslint.format.enable": true,
     "editor.codeActionsOnSave": {
-        "source.fixAll": "explicit",
-        "source.organizeImports": "explicit"
+        "source.fixAll.eslint": "explicit"
     },
-    "eslint.validate": ["javascript"]
+    "eslint.validate": ["javascript"],
+    "javascript.inlayHints.functionLikeReturnTypes.enabled": true,
 }

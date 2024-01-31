@@ -2,9 +2,9 @@
 /* eslint-disable require-jsdoc */
 /* eslint-disable max-len */
 
-const { AxiosError } = require("axios");
-const { HttpsError } = require("firebase-functions").https;
-const Logger = require("./logger");
+const {AxiosError} = require("axios");
+const {HttpsError} = require("firebase-functions").https;
+const Logger= require("./logger");
 
 class SessionExpired extends HttpsError {
   constructor() {
@@ -12,7 +12,7 @@ class SessionExpired extends HttpsError {
   }
 }
 
-class ServiceUnavaliableError extends HttpsError {
+class ServiceUnavailableError extends HttpsError {
   constructor() {
     super("unavailable", "Serviço indisponível!");
   }
@@ -41,34 +41,30 @@ class FileAlreadyExists extends HttpsError {
  * @returns {HttpsError}
  */
 const onError = (error) => {
-  Logger.debug("onError", error);
+  Logger.trackError(error);
   if (error instanceof HttpsError) {
-    return error;
+    throw error;
   } else if (error instanceof AxiosError) {
-    return validateAxiosError(error);
+    throw validateAxiosError(error);
   } else {
-    return new HttpsError("internal", error.message, error.stack);
+    throw new HttpsError("internal", error.message, error.stack);
   }
 };
 
-/**
- * @param {AxiosError} error
- * @return {HttpsError}
- */
 function validateAxiosError(error) {
   const statusCode = error.response.status;
   if (statusCode >= 400) {
-    return new ServiceUnavaliableError();
-  } else if (statusCode == 302) {
-    return new SessionExpired();
-  } else {
-    return new HttpsError("internal", error.message, error.stack);
+    return new ServiceUnavailableError();
   }
+  if (statusCode === 302) {
+    return new SessionExpired();
+  }
+  return new HttpsError("internal", error.message, error.stack);
 }
 
 module.exports = {
   SessionExpired,
-  ServiceUnavaliableError,
+  ServiceUnavailableError,
   UnknownError,
   FileAlreadyExists,
   AuthorizationError,
