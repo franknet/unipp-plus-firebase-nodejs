@@ -36,9 +36,9 @@ function calculateRecordsAvg(records) {
   return _.round(totalAvg / records.length, 1);
 }
 
-function filterLastReleased(discipline) {
+function filterLastReleased(record) {
   const grades = [];
-  const {np1, np2, ms, ex, mf} = discipline;
+  const {np1, np2, ms, ex, mf, courseName} = record;
 
   addNp1(np1, grades);
   addNp2(np1, grades);
@@ -49,7 +49,7 @@ function filterLastReleased(discipline) {
   if (grades.length === 0) {
     return null;
   }
-  const courseName = discipline["courseName"];
+
   return {courseName, grades};
 }
 
@@ -61,7 +61,7 @@ function addNp1(np1, grades) {
 
 function addNp2(np2, grades) {
   if (!unreleasedStatus.includes(np2) || releasedStatus.includes(np2)) {
-    grades.push(mapping("np1=2", Number.toNumber(np2)));
+    grades.push(mapping("np2", Number.toNumber(np2)));
   }
 }
 
@@ -110,9 +110,9 @@ function addStatus(record) {
   if (validateApStatus(mf, mfNum, status, record)) {
     return;
   }
-  validateNp1Status(np1, np1Num, np2, status);
-  validateNp2Status(np2, ex, ms, msNum, status);
-  validateMfStatus(np1, np2, mf, mfNum, status);
+  addNp1Status(np1, np1Num, np2, status);
+  addNp2Status(np2, ex, ms, msNum, status);
+  addMfStatus(np1, np2, mf, mfNum, status);
   record["status"] = status;
 }
 
@@ -126,7 +126,7 @@ function validateApStatus(mf, mfNum, status, record) {
   return false;
 }
 
-function validateNp1Status(np1, np1Num, np2, status) {
+function addNp1Status(np1, np1Num, np2, status) {
   if (np1 == "NC") {
     status.message.push("Você não compareceu na prova da NP1!");
   }
@@ -136,7 +136,7 @@ function validateNp1Status(np1, np1Num, np2, status) {
   }
 }
 
-function validateNp2Status(np2, ex, ms, msNum, status) {
+function addNp2Status(np2, ex, ms, msNum, status) {
   if (np2 == "NC") {
     status.message.push("Você não compareceu na prova da NP2!");
   }
@@ -146,7 +146,7 @@ function validateNp2Status(np2, ex, ms, msNum, status) {
   }
 }
 
-function validateMfStatus(np1, np2, mf, mfNum, status) {
+function addMfStatus(np1, np2, mf, mfNum, status) {
   if (Number.isNumber(np1) && Number.isNumber(np2) && Number.isNumber(mf)) {
     const hasPassed = mfNum >= 5;
     status.code = hasPassed ? 2 : 1;

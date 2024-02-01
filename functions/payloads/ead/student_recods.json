@@ -1,0 +1,303 @@
+{
+    "result": {
+        "data": [
+            {
+                "aluno": "0420166",
+                "disciplina": "6258-60",
+                "nomeDisciplina": "AVALIAÇÃO EDUCACIONAL",
+                "turma": "SEI_PD_0721",
+                "media": null,
+                "mediaNumerica": null,
+                "aulasPrevistas": 60,
+                "aulasMinistradas": 0,
+                "codDocente": "1",
+                "nomeDocente": "ATUALIZAR",
+                "situacaoMatricula": "Matriculado",
+                "situacaoDetalhe": "Curricular",
+                "periodo": {
+                    "ano": 2024,
+                    "semestre": 1
+                },
+                "faltas": [
+                    {
+                        "disciplina": "6258-60",
+                        "faltasAcumuladas": 0,
+                        "faltasPermitidas": 60,
+                        "percentualPresenca": 100
+                    }
+                ],
+                "mediaSubperiodos": null
+            },
+            {
+                "aluno": "0420166",
+                "disciplina": "6526-30",
+                "nomeDisciplina": "EDUCAÇÃO DE JOVENS E ADULTOS: FUNDAMENTOS E METODOLOGIA",
+                "turma": "SEI_PD_0721",
+                "media": null,
+                "mediaNumerica": null,
+                "aulasPrevistas": 30,
+                "aulasMinistradas": 0,
+                "codDocente": "1",
+                "nomeDocente": "ATUALIZAR",
+                "situacaoMatricula": "Matriculado",
+                "situacaoDetalhe": "Curricular",
+                "periodo": {
+                    "ano": 2024,
+                    "semestre": 1
+                },
+                "faltas": [
+                    {
+                        "disciplina": "6526-30",
+                        "faltasAcumuladas": 0,
+                        "faltasPermitidas": 7.5,
+                        "percentualPresenca": 100
+                    }
+                ],
+                "mediaSubperiodos": null
+            },
+            {
+                "aluno": "0420166",
+                "disciplina": "6546-60",
+                "nomeDisciplina": "ESCOLA, CURRÍCULO E CULTURA",
+                "turma": "SEI_PD_0721",
+                "media": null,
+                "mediaNumerica": null,
+                "aulasPrevistas": 60,
+                "aulasMinistradas": 0,
+                "codDocente": "1",
+                "nomeDocente": "ATUALIZAR",
+                "situacaoMatricula": "Matriculado",
+                "situacaoDetalhe": "Curricular",
+                "periodo": {
+                    "ano": 2024,
+                    "semestre": 1
+                },
+                "faltas": [
+                    {
+                        "disciplina": "6546-60",
+                        "faltasAcumuladas": 0,
+                        "faltasPermitidas": 15,
+                        "percentualPresenca": 100
+                    }
+                ],
+                "mediaSubperiodos": null
+            },
+            {
+                "aluno": "0420166",
+                "disciplina": "5261-300",
+                "nomeDisciplina": "ESTÁGIO SUPERVISIONADO",
+                "turma": "SEI_PD_0721",
+                "media": null,
+                "mediaNumerica": null,
+                "aulasPrevistas": 300,
+                "aulasMinistradas": 0,
+                "codDocente": "1",
+                "nomeDocente": "ATUALIZAR",
+                "situacaoMatricula": "Matriculado",
+                "situacaoDetalhe": "Curricular",
+                "periodo": {
+                    "ano": 2024,
+                    "semestre": 1
+                },
+                "faltas": [
+                    {
+                        "disciplina": "5261-300",
+                        "faltasAcumuladas": 0,
+                        "faltasPermitidas": 75,
+                        "percentualPresenca": 100
+                    }
+                ],
+                "mediaSubperiodos": null
+            },
+            {
+                "aluno": "0420166",
+                "disciplina": "6719-15",
+                "nomeDisciplina": "ESTUDOS DISCIPLINARES XI",
+                "turma": "SEI_PD_0721",
+                "media": null,
+                "mediaNumerica": null,
+                "aulasPrevistas": 15,
+                "aulasMinistradas": 0,
+                "codDocente": "1",
+                "nomeDocente": "ATUALIZAR",
+                "situacaoMatricula": "Matriculado",
+                "situacaoDetalhe": "Curricular",
+                "periodo": {
+                    "ano": 2024,
+                    "semestre": 1
+                },
+                "faltas": [
+                    {
+                        "disciplina": "6719-15",
+                        "faltasAcumuladas": 0,
+                        "faltasPermitidas": 3.75,
+                        "percentualPresenca": 100
+                    }
+                ],
+                "mediaSubperiodos": null
+            },
+            {
+                "aluno": "0420166",
+                "disciplina": "6720-15",
+                "nomeDisciplina": "ESTUDOS DISCIPLINARES XII",
+                "turma": "SEI_PD_0721",
+                "media": null,
+                "mediaNumerica": null,
+                "aulasPrevistas": 15,
+                "aulasMinistradas": 0,
+                "codDocente": "1",
+                "nomeDocente": "ATUALIZAR",
+                "situacaoMatricula": "Matriculado",
+                "situacaoDetalhe": "Curricular",
+                "periodo": {
+                    "ano": 2024,
+                    "semestre": 1
+                },
+                "faltas": [
+                    {
+                        "disciplina": "6720-15",
+                        "faltasAcumuladas": 0,
+                        "faltasPermitidas": 3.75,
+                        "percentualPresenca": 100
+                    }
+                ],
+                "mediaSubperiodos": null
+            },
+            {
+                "aluno": "0420166",
+                "disciplina": "5393-30",
+                "nomeDisciplina": "MÉTODOS DE PESQUISA",
+                "turma": "SEI_PD_0721",
+                "media": null,
+                "mediaNumerica": null,
+                "aulasPrevistas": 30,
+                "aulasMinistradas": 0,
+                "codDocente": "1",
+                "nomeDocente": "ATUALIZAR",
+                "situacaoMatricula": "Matriculado",
+                "situacaoDetalhe": "Curricular",
+                "periodo": {
+                    "ano": 2024,
+                    "semestre": 1
+                },
+                "faltas": [
+                    {
+                        "disciplina": "5393-30",
+                        "faltasAcumuladas": 0,
+                        "faltasPermitidas": 7.5,
+                        "percentualPresenca": 100
+                    }
+                ],
+                "mediaSubperiodos": null
+            },
+            {
+                "aluno": "0420166",
+                "disciplina": "6571-60",
+                "nomeDisciplina": "ORIENTAÇÃO E PRÁTICA DE GESTÃO DA EDUCAÇÃO EM AMBIENTES ESCOLARES E NÃO ESCOLARES",
+                "turma": "SEI_PD_0721",
+                "media": null,
+                "mediaNumerica": null,
+                "aulasPrevistas": 60,
+                "aulasMinistradas": 0,
+                "codDocente": "1",
+                "nomeDocente": "ATUALIZAR",
+                "situacaoMatricula": "Matriculado",
+                "situacaoDetalhe": "Curricular",
+                "periodo": {
+                    "ano": 2024,
+                    "semestre": 1
+                },
+                "faltas": [
+                    {
+                        "disciplina": "6571-60",
+                        "faltasAcumuladas": 0,
+                        "faltasPermitidas": 15,
+                        "percentualPresenca": 100
+                    }
+                ],
+                "mediaSubperiodos": null
+            },
+            {
+                "aluno": "0420166",
+                "disciplina": "6547-100",
+                "nomeDisciplina": "PROJETOS E PRÁTICAS DE AÇÃO PEDAGÓGICA",
+                "turma": "SEI_PD_0721",
+                "media": null,
+                "mediaNumerica": null,
+                "aulasPrevistas": 100,
+                "aulasMinistradas": 0,
+                "codDocente": "1",
+                "nomeDocente": "ATUALIZAR",
+                "situacaoMatricula": "Matriculado",
+                "situacaoDetalhe": "Curricular",
+                "periodo": {
+                    "ano": 2024,
+                    "semestre": 1
+                },
+                "faltas": [
+                    {
+                        "disciplina": "6547-100",
+                        "faltasAcumuladas": 0,
+                        "faltasPermitidas": 25,
+                        "percentualPresenca": 100
+                    }
+                ],
+                "mediaSubperiodos": null
+            },
+            {
+                "aluno": "0420166",
+                "disciplina": "6121-60",
+                "nomeDisciplina": "RELATÓRIO DO PROJETO DE PESQUISA: APRESENTAÇÃO",
+                "turma": "SEI_PD_0721",
+                "media": null,
+                "mediaNumerica": null,
+                "aulasPrevistas": 60,
+                "aulasMinistradas": 0,
+                "codDocente": "1",
+                "nomeDocente": "ATUALIZAR",
+                "situacaoMatricula": "Matriculado",
+                "situacaoDetalhe": "Curricular",
+                "periodo": {
+                    "ano": 2024,
+                    "semestre": 1
+                },
+                "faltas": [
+                    {
+                        "disciplina": "6121-60",
+                        "faltasAcumuladas": 0,
+                        "faltasPermitidas": 15,
+                        "percentualPresenca": 100
+                    }
+                ],
+                "mediaSubperiodos": null
+            },
+            {
+                "aluno": "0420166",
+                "disciplina": "6949-30",
+                "nomeDisciplina": "TÓPICOS DE ATUAÇÃO PROFISSIONAL - PEDAGOGIA",
+                "turma": "SEI_PD_0721",
+                "media": null,
+                "mediaNumerica": null,
+                "aulasPrevistas": 30,
+                "aulasMinistradas": 0,
+                "codDocente": "1",
+                "nomeDocente": "ATUALIZAR",
+                "situacaoMatricula": "Matriculado",
+                "situacaoDetalhe": "Curricular",
+                "periodo": {
+                    "ano": 2024,
+                    "semestre": 1
+                },
+                "faltas": [
+                    {
+                        "disciplina": "6949-30",
+                        "faltasAcumuladas": 0,
+                        "faltasPermitidas": 7.5,
+                        "percentualPresenca": 100
+                    }
+                ],
+                "mediaSubperiodos": null
+            }
+        ]
+    }
+}

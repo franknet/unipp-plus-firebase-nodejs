@@ -53,10 +53,10 @@ const onError = (error) => {
 
 function validateAxiosError(error) {
   const statusCode = error.response.status;
-  if (statusCode >= 400) {
+  if (statusCode >= 500) {
     return new ServiceUnavailableError();
   }
-  if (statusCode === 302) {
+  if (statusCode === 302 | 401) {
     return new SessionExpired();
   }
   return new HttpsError("internal", error.message, error.stack);

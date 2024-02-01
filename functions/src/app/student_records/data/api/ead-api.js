@@ -4,12 +4,12 @@
 const {HttpClient} = require("up-core").Http;
 
 exports.fetchRecords = (session) => HttpClient.request({
-  url: `https://gfa.unip.br/aluno/apix/pessoas/${session["user"]["id"]}/alunos/${session["user"]["rg"]}/boletim`,
+  url: `https://gfa.unip.br/aluno/apix/pessoas/${session["student"]["id"]}/alunos/${session["student"]["rg"]}/boletim`,
   headers: {"Cookie": session["cookie"]},
 });
 
 exports.fetchReleasedRecords = (session) => HttpClient.request({
-  url: `https://gfa.unip.br/aluno/apix/pessoas/${session["user"]["id"]}/alunos/${session["user"]["rg"]}/ultimasNotas`,
+  url: `https://gfa.unip.br/aluno/apix/pessoas/${session["student"]["id"]}/alunos/${session["student"]["rg"]}/qtddNotas/10/ultimasNotas`,
   headers: {"Cookie": session["cookie"]},
 });
 
