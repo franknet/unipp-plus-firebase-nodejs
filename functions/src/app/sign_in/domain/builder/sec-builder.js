@@ -19,7 +19,7 @@ exports.buildUser = function(user, systems, photoUrl) {
     "rg": user["identificacao"],
     "name": user["nomeUsuario"],
     "gender": user["sexo"],
-    "status": validateStatus(user),
+    "status": status(user),
     "isEad": false,
     "cardId": cardId(systems),
     "course": course(user),
@@ -27,7 +27,7 @@ exports.buildUser = function(user, systems, photoUrl) {
   };
 };
 
-function validateStatus(user) {
+function status(user) {
   return {
     "message": genderStatusMessage[user["sexo"]][user["situacao"] == "nao_matriculado"],
     "code": user["situacao"] == "nao_matriculado" ? 0 : 1,

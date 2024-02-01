@@ -3,6 +3,11 @@
 
 const _ = require("lodash");
 
+const gender = {
+  "F": "Feminino",
+  "M": "Masculino",
+};
+
 exports.build = (userData, contractData, systemsData) => {
   const user = userData["content"][0];
   const isContractSigned = contractData["valor"];
@@ -12,7 +17,7 @@ exports.build = (userData, contractData, systemsData) => {
     "id": user["id"],
     "rg": user["matricula"],
     "name": user["nomeAluno"],
-    "gender": user["sexo"],
+    "gender": gender[user["sexo"]],
     "photo": user["foto"],
     "status": userStatus,
     "isEad": true,

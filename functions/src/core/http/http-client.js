@@ -5,9 +5,11 @@
 
 const Logger = require("../firebase/logger");
 const axios = require("axios").default;
+const Status = require("./status-code-validations");
 axios.defaults.headers.common["User-Agent"] = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/109.0";
 axios.defaults.maxRedirects = 0;
 axios.defaults.method = "get";
+axios.defaults.validateStatus = Status.Ok;
 axios.interceptors.response.use(responseInterceptor);
 
 const ACCEPTED_CONTENT_TYPES = [

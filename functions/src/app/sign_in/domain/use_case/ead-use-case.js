@@ -9,7 +9,8 @@ exports.fetchSec = (credentials, systemsData) => fetchStudent(credentials, syste
     .then(fetchContract)
     .then(onFetchContract)
     .then(fetchUser)
-    .then(onFetchUser);
+    .then(onFetchUser)
+    .then(sendResponse);
 
 async function fetchStudent(credentials, systemsData) {
   const response = await Repository.signIn(credentials);
@@ -41,13 +42,18 @@ async function fetchUser({cookie, studentId, systemsData, contractData}) {
 
 function onFetchUser({cookie, systemsData, contractData, response}) {
   const userData = response.data;
+  const studentData = Builder.build(userData, contractData, systemsData);
+  return {cookie, studentData};
+}
+
+function sendResponse({cookie, studentData}) {
   return {
     "data": {
       "cookie": {
-        "host": "",
+        "host": "https://gfa.unip.br",
         "value": cookie,
       },
-      "student": Builder.build(userData, contractData, systemsData),
+      "student": studentData,
     },
   };
 }

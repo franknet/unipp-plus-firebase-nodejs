@@ -6,19 +6,15 @@ exports.fetchSec = (url) => new Promise((resolve, reject) => {
     url: url,
     validateStatus: HttpStatus.Redirect,
   }).then((response) => {
-    const cookie = response["headers"]["set-cookie"];
-    const newSecUrl = response["headers"]["location"];
-    
     HttpClient.request({
-      url: newSecUrl,
-      headers: {"Cookie": cookie},
+      url: response["headers"]["location"],
+      headers: {"Cookie": response["headers"]["set-cookie"]},
       validateStatus: HttpStatus.Redirect,
-    }).then(resolve(response)).catch(reject)
-  }).catch(reject)
+    }).then(resolve(response)).catch(reject);
+  }).catch(reject);
 });
 
 exports.fetchStudentProfile = (cookie) => HttpClient.request({
   url: "https://sec2.unip.br/NovaSecretaria/CadastroSecretariaOnline/CadastroSecretariaOnline",
   headers: {"Cookie": cookie},
-  validateStatus: HttpStatus.Ok,
 });

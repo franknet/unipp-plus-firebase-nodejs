@@ -4,10 +4,11 @@
 const Repository = require("../../data/respository/sec-repository");
 const Builder = require("../builder/sec-builder");
 
-exports.fetchSec = async (secUrl, loginData, systemsData) => fetchSecHome(secUrl, loginData, systemsData)
+exports.fetchSec = (secUrl, loginData, systemsData) => fetchSecHome(secUrl, loginData, systemsData)
     .then(onFetchSecHome)
     .then(fetchStudentProfile)
-    .then(onFetchStudentProfile);
+    .then(onFetchStudentProfile)
+    .then(sendResponse);
 
 async function fetchSecHome(secUrl, loginData, systemsData) {
   const response = await Repository.fetchSec(secUrl);
@@ -26,12 +27,19 @@ async function fetchStudentProfile({cookie, loginData, systemsData}) {
 
 function onFetchStudentProfile({cookie, loginData, systemsData, response}) {
   const photoUrl = Builder.findPhotoSrc(response.data);
+  const studentData = Builder.buildUser(loginData, systemsData, photoUrl);
+  return {cookie, studentData};
+}
+
+function sendResponse({cookie, studentData}) {
   return {
-    "cookie": {
-      "host": "",
-      "value": cookie,
+    "data": {
+      "cookie": {
+        "host": "https://sec2.unip.br",
+        "value": cookie,
+      },
+      "student": studentData,
     },
-    "student": Builder.buildUser(loginData, systemsData, photoUrl),
   };
 }
 
