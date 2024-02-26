@@ -1,8 +1,6 @@
 const {HttpClient, HttpStatus} = require("up-core").Http;
 const Firestore = require("./firestore");
-
-// eslint-disable-next-line max-len
-const creds = `${process.env.PAYMENT_SERVICE_USERNAME}:${process.env.PAYMENT_SERVICE_API_SECRET}`;
+const {basicAuthHeader} = require("../../config");
 
 exports.createCustomer = async (user) => {
   const customer = await Firestore.fetchCustomer(user);
@@ -15,13 +13,13 @@ exports.createCustomer = async (user) => {
     url: `${process.env.PAYMENT_SERVICE_ENDPOINT}/customers`,
     method: "post",
     headers: {
-      "Authorization": `Basic ${Buffer.from(creds).toString("base64")}`,
+      "Authorization": basicAuthHeader,
     },
     data: {
       email: user.email,
       reference_id: user.uid,
     },
-    validateStatus: HttpStatus.Ok,
+    validateStatus: HttpStatus.Created,
   });
 
   return response.data;

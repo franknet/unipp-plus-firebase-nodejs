@@ -19,3 +19,4 @@ exports.ead_fetch_academic_records = Functions.onCall(eadApp.academicRecords.fet
 
 const paymentService = require("./payment_service");
 exports.payment_service_sync_customer = Functions.beforeUserSignedIn(paymentService.customers.syncCustomer);
+exports.payment_service_sync_product = Functions.onProductCreated(paymentService.products.syncProduct);
