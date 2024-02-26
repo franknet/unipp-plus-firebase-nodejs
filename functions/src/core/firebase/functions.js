@@ -1,6 +1,5 @@
 /* eslint-disable valid-jsdoc */
-const {https} = require("firebase-functions/v2");
-const {beforeUserSignedIn} = require("firebase-functions/v2/identity");
+const {https, identity} = require("firebase-functions/v2");
 
 const opts = {
   region: "southamerica-east1",
@@ -10,4 +9,5 @@ const opts = {
 };
 
 exports.onCall = (handler) => https.onCall(opts, handler);
-exports.beforeUserSignedIn = (handler) => beforeUserSignedIn(opts, handler);
+exports.beforeUserSignedIn = (handler) =>
+  identity.beforeUserSignedIn(opts, handler);
