@@ -1,4 +1,4 @@
 
-module.exports.Functions = require("./https-function");
+module.exports.Functions = require("./functions");
 module.exports.Logger = require("./logger");
 module.exports.Errors = require("./https-errors");

@@ -16,3 +16,6 @@ const eadApp = require("./app_ead");
 exports.ead_fetch_notifications = Functions.onCall(eadApp.notifications.fetchNotificationsHandler);
 exports.ead_fetch_grades = Functions.onCall(eadApp.grades.fetchGradesHandler);
 exports.ead_fetch_academic_records = Functions.onCall(eadApp.academicRecords.fetchAcademicRecordsHandler);
+
+const paymentService = require("./payment_service");
+exports.payment_service_sync_customer = Functions.beforeUserSignedIn(paymentService.customers.syncCustomer);
