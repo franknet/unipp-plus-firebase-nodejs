@@ -4,7 +4,8 @@ const Repository = require("../data/repository");
 const Builder = require("./builder");
 
 // eslint-disable-next-line max-len
-exports.fetchAcademicRecords = (session) => Repository.fetchAcademicRecords(session)
+exports.fetchAcademicRecords = (session) => Repository
+    .fetchAcademicRecords(session)
     .then(onFetchAcademicRecords)
     .catch(Errors.onError);
 

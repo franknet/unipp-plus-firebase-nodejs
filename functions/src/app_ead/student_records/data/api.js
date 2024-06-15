@@ -1,18 +1,16 @@
 /* eslint-disable max-len */
 /* eslint-disable valid-jsdoc */
 
-const {HttpClient, HttpStatus} = require("up-core").Http;
+const {HttpClient} = require("up-core").Http;
 
 exports.fetchGrades = (session) => HttpClient.request({
   url: `https://gfa.unip.br/aluno/apix/pessoas/${session["user"]["id"]}/alunos/${session["user"]["rg"]}/boletim`,
   headers: {"Cookie": session["cookie"]},
-  validateStatus: HttpStatus.Ok,
 });
 
 exports.fetchReleasedGrades = (session) => HttpClient.request({
   url: `https://gfa.unip.br/aluno/apix/pessoas/${session["user"]["id"]}/alunos/${session["user"]["rg"]}/ultimasNotas`,
   headers: {"Cookie": session["cookie"]},
-  validateStatus: HttpStatus.Ok,
 });
 
 exports.fetchAttendanceDetails = (session, data) => HttpClient.request({
@@ -23,5 +21,4 @@ exports.fetchAttendanceDetails = (session, data) => HttpClient.request({
     "Cookie": session["cookie"],
   },
   json: data,
-  validateStatus: HttpStatus.Ok,
 });

@@ -8,7 +8,7 @@ const gender = {
   "M": "Masculino",
 };
 
-exports.build = (userData, contractData, systemsData) => {
+exports.build = (loginData, systemsData, contractData, userData) => {
   const user = userData["content"][0];
   const isContractSigned = contractData["valor"];
   const userStatus = (isContractSigned ? "SignContract" : user["semestre"]) == null ? "Enroll" : user["situacaoAluno"];
@@ -23,6 +23,7 @@ exports.build = (userData, contractData, systemsData) => {
     "isEad": true,
     "cardId": cardId(systemsData),
     "course": course(user),
+    "pendentRegister": loginData["cadastroPendente"],
   };
 };
 

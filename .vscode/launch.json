@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "command": "firebase emulators:start --only functions",
+            "command": "firebase emulators:start",
             "name": "Start Functions Emulator",
             "request": "launch",
             "type": "node-terminal",

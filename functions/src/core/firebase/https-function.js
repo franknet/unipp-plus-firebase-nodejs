@@ -6,3 +6,9 @@ exports.onCall = (handler) => https.onCall({
   enforceAppCheck: false,
   maxInstances: 10,
 }, handler);
+
+exports.onRequest = (handler) => https.onRequest({
+  region: "southamerica-east1",
+  enforceAppCheck: false,
+  maxInstances: 10,
+}, handler);

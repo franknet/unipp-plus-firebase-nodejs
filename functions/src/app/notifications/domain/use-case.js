@@ -4,9 +4,13 @@ const {fetchSecHome} = require("../data/repository");
 const {buildNotifications} = require("./builder");
 const {Errors} = require("up-core").Firebase;
 
-exports.fetchNotifications = async (session) => {
+/**
+ * @param {import("firebase-functions/v2/https").Request} request
+ */
+exports.fetchNotifications = async (request) => {
   try {
-    const {data} = await fetchSecHome(session);
+    const cookie = request.headers["cookie"];
+    const {data} = await fetchSecHome(cookie);
     return buildNotifications(data);
   } catch (error) {
     throw Errors.onError(error);

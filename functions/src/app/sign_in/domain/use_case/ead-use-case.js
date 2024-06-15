@@ -4,7 +4,7 @@
 const Repository = require("../../data/respository/ead-repository");
 const Builder = require("../builder/ead-builder");
 
-exports.fetchSec = (credentials, systemsData) => fetchStudent(credentials, systemsData)
+exports.fetchSec = (credentials, loginData, systemsData) => fetchStudent(credentials, loginData, systemsData)
     .then(onFetchStudent)
     .then(fetchContract)
     .then(onFetchContract)
@@ -12,37 +12,37 @@ exports.fetchSec = (credentials, systemsData) => fetchStudent(credentials, syste
     .then(onFetchUser)
     .then(sendResponse);
 
-async function fetchStudent(credentials, systemsData) {
+async function fetchStudent(credentials, loginData, systemsData) {
   const response = await Repository.signIn(credentials);
-  return {systemsData, response};
+  return {loginData, systemsData, response};
 }
 
-function onFetchStudent({systemsData, response}) {
+function onFetchStudent({loginData, systemsData, response}) {
   const {data, headers} = response;
   const cookie = headers["set-cookie"];
   const studentId = data["id"];
   const studentRg = data["login"];
-  return {cookie, studentId, studentRg, systemsData};
+  return {cookie, studentId, studentRg, loginData, systemsData};
 }
 
-async function fetchContract({cookie, studentId, studentRg, systemsData}) {
+async function fetchContract({cookie, studentId, studentRg, loginData, systemsData}) {
   const response = await Repository.fetchContract(cookie, studentRg);
-  return {cookie, studentId, systemsData, response};
+  return {cookie, studentId, loginData, systemsData, response};
 }
 
-function onFetchContract({cookie, studentId, systemsData, response}) {
+function onFetchContract({cookie, studentId, loginData, systemsData, response}) {
   const contractData = response.data;
-  return {cookie, studentId, systemsData, contractData};
+  return {cookie, studentId, loginData, systemsData, contractData};
 }
 
-async function fetchUser({cookie, studentId, systemsData, contractData}) {
+async function fetchUser({cookie, studentId, loginData, systemsData, contractData}) {
   const response = await Repository.fetchUser(cookie, studentId);
-  return {cookie, systemsData, contractData, response};
+  return {cookie, loginData, systemsData, contractData, response};
 }
 
-function onFetchUser({cookie, systemsData, contractData, response}) {
+function onFetchUser({cookie, loginData, systemsData, contractData, response}) {
   const userData = response.data;
-  const studentData = Builder.build(userData, contractData, systemsData);
+  const studentData = Builder.build(loginData, systemsData, contractData, userData);
   return {cookie, studentData};
 }
 

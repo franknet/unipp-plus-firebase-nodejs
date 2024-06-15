@@ -1,18 +1,21 @@
 /* eslint-disable max-len */
 
 require("firebase-admin").initializeApp();
-
 const {Functions} = require("up-core").Firebase;
+const express = require("express");
+const app = express();
 
-const app = require("./app");
-exports.sign_in = Functions.onCall(app.signIn.signInHandler);
-exports.fetch_notifications = Functions.onCall(app.notifications.fetchNotificationsHandler);
-exports.fetch_student_records = Functions.onCall(app.studentRecords.fetchSudentRecordsHandler);
-exports.fetch_academic_records = Functions.onCall(app.academicRecords.fetchAcademicRecordsHandler);
-exports.fetch_extract = Functions.onCall(app.finance.fetchExtractHandler);
-exports.fetch_bills = Functions.onCall(app.finance.fetchBillshandler);
+const sec = require("./app");
+app.post("/sign_in", sec.signIn.signInHandler);
+app.get("/notifications", sec.notifications.fetchNotificationsHandler);
+app.get("/student_records", sec.studentRecords.fetchSudentRecordsHandler);
+app.get("/academic_records", sec.academicRecords.fetchAcademicRecordsHandler);
+app.get("/finance/extract", sec.finance.fetchExtractHandler);
+app.get("/finance/bills", sec.finance.fetchBillshandler);
 
-const eadApp = require("./app_ead");
-exports.ead_fetch_notifications = Functions.onCall(eadApp.notifications.fetchNotificationsHandler);
-exports.ead_fetch_grades = Functions.onCall(eadApp.grades.fetchGradesHandler);
-exports.ead_fetch_academic_records = Functions.onCall(eadApp.academicRecords.fetchAcademicRecordsHandler);
+const secEad = require("./app_ead");
+app.get("/ead/notifications", secEad.notifications.fetchNotificationsHandler);
+app.get("/ead/student_records", secEad.studentRecords.fetchStudentRecordsHandler);
+app.get("/ead/academic_records", secEad.academicRecords.fetchAcademicRecordsHandler);
+
+exports.api = Functions.onRequest(app);

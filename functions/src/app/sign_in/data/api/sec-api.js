@@ -1,17 +1,15 @@
 
 const {HttpClient, HttpStatus} = require("up-core").Http;
 
-exports.fetchSec = (url) => new Promise((resolve, reject) => {
-  HttpClient.request({
-    url: url,
-    validateStatus: HttpStatus.Redirect,
-  }).then((response) => {
-    HttpClient.request({
-      url: response["headers"]["location"],
-      headers: {"Cookie": response["headers"]["set-cookie"]},
-      validateStatus: HttpStatus.Redirect,
-    }).then(resolve(response)).catch(reject);
-  }).catch(reject);
+exports.fetchSec = (url) => HttpClient.request({
+  url: url,
+  validateStatus: HttpStatus.Redirect,
+});
+
+exports.fetchSec2 = ({url, cookie}) => HttpClient.request({
+  url: url,
+  headers: {"Cookie": cookie},
+  validateStatus: HttpStatus.Redirect,
 });
 
 exports.fetchStudentProfile = (cookie) => HttpClient.request({

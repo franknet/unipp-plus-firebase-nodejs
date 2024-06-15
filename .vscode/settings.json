@@ -3,6 +3,7 @@
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": "explicit"
     },
+    "editor.snippetSuggestions": "top",
     "eslint.validate": ["javascript"],
     "javascript.inlayHints.functionLikeReturnTypes.enabled": true,
 }

@@ -33,11 +33,10 @@ function onFetchStudentProfile({cookie, loginData, systemsData, response}) {
 
 function sendResponse({cookie, studentData}) {
   return {
+    "headers": {
+      "set-cookie": cookie,
+    },
     "data": {
-      "cookie": {
-        "host": "https://sec2.unip.br",
-        "value": cookie,
-      },
       "student": studentData,
     },
   };

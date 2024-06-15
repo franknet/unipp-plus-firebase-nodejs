@@ -42,16 +42,16 @@ function onFetchSystems({credentials, loginData, response}) {
   if (!_.isNil(sec)) {
     const secUrl = sec["url"];
     return {loginData, systemsData, secUrl, isEad: false};
-  } else if (!_.isNil(secEad)) {
-    return {credentials, systemsData, isEad: true};
-  } else {
-    throw new Errors.ServiceUnavailableError();
   }
+  if (!_.isNil(secEad)) {
+    return {credentials, loginData, systemsData, isEad: true};
+  }
+  throw new Errors.ServiceUnavailableError();
 }
 
 async function fetchSec({credentials, loginData, systemsData, secUrl, isEad}) {
   if (isEad) {
-    return EadUseCase.fetchSec(credentials, systemsData);
+    return EadUseCase.fetchSec(credentials, loginData, systemsData);
   } else {
     return SecUseCase.fetchSec(secUrl, loginData, systemsData);
   }
