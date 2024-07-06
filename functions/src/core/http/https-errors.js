@@ -29,7 +29,7 @@ class ApiError extends Error {
  * @returns {ApiError}
  */
 const parseError = (error) => {
-  Logger.debug("Error: ", error);
+  Logger.debug("Error: ", error.stack);
 
   if (error instanceof ApiError) {
     return error;

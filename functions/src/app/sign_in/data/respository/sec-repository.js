@@ -1,6 +1,5 @@
 
-const API = require("../api/sec-api");
+const {fetchSec, fetchSec2} = require("../api").secApi;
 
-exports.fetchSec = (url) => API.fetchSec(url);
-exports.fetchSec2 = ({url, cookie}) => API.fetchSec2({url, cookie});
-exports.fetchStudentProfile = (cookie) => API.fetchStudentProfile(cookie);
+exports.fetchSec = fetchSec;
+exports.fetchSec2 = fetchSec2;

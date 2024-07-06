@@ -15,3 +15,6 @@ exports.fetchSystems = (token) => HttpClient.request({
   url: "https://sistemasunip.unip.br/api-autenticacao/sistemas/usuario",
   headers: {"Authorization": token},
 });
+
+exports.secApi = require("./sec-api");
+exports.secEadApi = require("./ead-api");
